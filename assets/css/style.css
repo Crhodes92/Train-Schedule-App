@@ -1,0 +1,29 @@
+body {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.jumbotron {
+    background-color: rgb(19, 19, 82);
+    color: white;
+}
+
+h3 {
+    background: rgb(19, 19, 82)
+}
+
+.card-header {
+    background-color: rgb(19, 19, 82);
+    color: white; 
+}
+
+.card {
+    border-color: rgb(19, 19, 82);
+}
+
+.form-control {
+    border-color: rgb(19, 19, 82);
+}
+
+.btn-primary {
+    background-color: rgb(19, 19, 82);
+}
