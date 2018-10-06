@@ -75,41 +75,45 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
     var dataName = childSnapshot.val().trainName;
     var dataDest = childSnapshot.val().destination;
-    var dataFirst = moment(childSnapshot.val().firstTrain, "HH:mm:a").format("hh:mm:a");
+    var dataFirst = moment(childSnapshot.val().firstTrain, "HH:mm:a").format("YYYY-MM-DD HH:mm");
     var dataFreq = moment(childSnapshot.val().frequency, "mm").format("mm");
 
     console.log(dataName);
     console.log(dataDest);
     console.log(dataFirst);
     console.log(dataFreq);
-    console.log(moment()) 
+    console.log(moment()); 
 
    
     console.log("the first start time is "+ dataFirst);
     
     var diffTime = moment().diff(moment(dataFirst), "minutes");
-    console.log("this is the number of minutes between now and the start time"+ diffTime)
+    console.log("this is the number of minutes between now and the start time"+ diffTime);
 
     var tRemainder =  diffTime % dataFreq;
-    console.log("this is the remainder of minutes between the difference and the frequency" + tRemainder)
+    console.log("this is the remainder of minutes between the difference and the frequency" + tRemainder);
 
     var tMinutesToTrain = dataFreq - tRemainder;
-    console.log("this is the time to the train arrives" + tMinutesToTrain)
+    console.log("this is the time to the train arrives" + tMinutesToTrain);
 
-    var nextTrain = moment().add(tMinutesToTrain, "minutes")
-    console.log("this is the number of minutes till the train arrives" + nextTrain)
+    var nextTrain = moment().add(tMinutesToTrain, "minutes");
+    console.log("this is the arrival time of the train" + moment(nextTrain).format("hh:mm"));
     
 
     var htmlinsert = "<tr class datainsert>" + 
-                        "<td>"+dataName+"<td>"+
-                        "<td>"+dataDest+"<td>"
-                        "<td>"+dataFreq+"<td>"
-                        "<td>"+nextTrain+"<td>"
-                        "<td>"+tMinutesToTrain+"<td>"
-                        "<tr>"
+                        "<td>"+dataName+"</td>"+
+                        "<td>"+dataDest+"</td>"+
+                        "<td>"+dataFreq+"</td>"+
+                        "<td>"+moment(nextTrain).format("hh:mm:a") + "</td>"+
+                        "<td>"+tMinutesToTrain+"</td>"+
+                        "</tr>"
     $("#datagoeshere").append(htmlinsert);
+
+}, function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+  })
     
-})
+
 
 
 
